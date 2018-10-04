@@ -1,28 +1,28 @@
-JSON Validation
+Validasi JSON
 ===============
 
-JSON Validation is a media type for describing and validating the structure of
-JSON data. Over the years, I've written a lot of JSON Schemas and helped others
-in all kinds of domains write their JSON Schemas. JSON Validation is a
-re-imaginging of JSON Schema based on my experiences and knowledge. In part,
-it's an implementation of how I would define JSON Schema if given a blank slate,
-but mostly I'm using this implementation as a sandbox to try out new ideas and
-approaches to the JSON Schema style.
+JSON Validasi adalah jenis media untuk menggambarkan dan memvalidasi struktur
+Data JSON. Selama bertahun-tahun, saya telah menulis banyak JSON Schemas dan membantu orang lain
+di semua jenis domain menulis JSON Schemas mereka. Validasi JSON adalah a
+pencitraan ulang JSON Skema berdasarkan pengalaman dan pengetahuan saya. Dalam bagian,
+ini merupakan implementasi tentang bagaimana saya mendefinisikan JSON Skema jika diberi batu tulis kosong,
+tetapi kebanyakan saya menggunakan implementasi ini sebagai kotak pasir untuk mencoba ide-ide baru dan
+pendekatan ke gaya Skema JSON.
 
-A JSON Validation document is a [JSON Reference](https://github.com/jdesrosiers/json-reference)
-document and has the content type `application/validation+json`. To understand
-JSON Validation, you should first understand JSON Reference. Beware that this is
-not quite the same JSON Reference that is used in JSON Schema.
+Dokumen Validasi JSON adalah a [Referensi JSON](https://github.com/jdesrosiers/json-reference)
+dokumen dan memiliki tipe konten `application/validation+json`. Untuk mengerti
+JSON Validasi, Anda harus terlebih dahulu memahami Referensi JSON. Berhati-hatilah bahwa ini
+tidak cukup Referensi JSON yang sama yang digunakan dalam JSON Schema.
 
-A JSON Validation document is a delarative set of constraints that a JSON
-document must conform to in order to be considered valid. The JSON Validation
-document is parsable into a pure function that can be used to validate a JSON
-document in any language.
+Sebuah dokumen Validasi JSON adalah sekumpulan batasan delaratif yang dibuat oleh seorang JSON
+dokumen harus sesuai agar dianggap valid. Validasi JSON
+dokumen dapat diuraikan menjadi fungsi murni yang dapat digunakan untuk memvalidasi JSON
+dokumen dalam bahasa apa pun.
 
-Installation
+Instalasi
 ------------
 
-Usage
+Pemakaian
 -----
 
 ```http
@@ -45,10 +45,10 @@ Content-Type: application/validation+json
 
 ```javascript
 (async () => {
-  // Get a validation document
+  // Dapatkan dokumen validasi
   const doc = await JsonValidation.get("http://validation.hyperjump.io/example1");
 
-  // Get a validator function from a validation document
+  // Dapatkan fungsi validator dari dokumen validasi
   const validate = await JsonValidation.validate(doc);
 
   const result1 = validate({ "foo": "bar" });
@@ -59,84 +59,84 @@ Content-Type: application/validation+json
 }());
 ```
 
-Contributing
+Berkontribusi
 ------------
 
-### Tests
+### Tes
 
-Run the tests
+Jalankan tes
 
 ```bash
 npm test
 ```
 
-Run the tests with a continuous test runner
+Jalankan tes dengan pelari uji kontinyu
 ```bash
 npm test -- --watch
 ```
 
-Philosophy and Architectural Contraints
+Filosofi dan Ketertinggalan Arsitektur
 ---------------------------------------
 
 ### JSON
 
-JSON Validation does just what it says it does; It validates JSON. Is not
-intended for validating programming language specific types or data structures.
+JSON Validasi hanya melakukan apa yang dikatakannya; Ini memvalidasi JSON. Tidak
+ditujukan untuk memvalidasi jenis bahasa pemrograman tertentu atau struktur data.
 
 ### Client-Server
 
-JSON Validation is designed to be used as part of a client-server architecture.
-Therefore JSON Validation documents, must be identified by a URL and must be
-retrieveable.
+JSON Validasi dirancang untuk digunakan sebagai bagian dari arsitektur client-server.
+Oleh karena itu dokumen Validasi JSON, harus diidentifikasi oleh URL dan harus
+dapat diambil.
 
 ### Layered System
 
-JSON Validation should be composable at as many levels as possible. There are a
-set of predefined keywords. New keywords can be defined as a composition of
-other keywords. (coming soon)
+Validasi JSON harus dapat disusun pada berbagai level sebanyak mungkin. Ada sebuah
+set kata kunci yang telah ditetapkan. Kata kunci baru dapat didefinisikan sebagai komposisi
+kata kunci lainnya. (segera akan datang)
 
-A JSON Validation document is a collection of keywords. Each keyword adds a
-constraint. An empty JSON Validation document (`{}`) has no contraints. All JSON
-documents are valid. Each keyword adds a constraint further narrowing what
-constitutes a valid document.
+Dokumen JSON Validasi adalah kumpulan kata kunci. Setiap kata kunci menambahkan
+paksaan. Dokumen Validasi JSON yang kosong (`{}`) tidak memiliki hambatan. Semua JSON
+dokumen valid. Setiap kata kunci menambah kendala semakin mempersempit apa
+merupakan dokumen yang valid.
 
 ### Stateless
 
-All keywords are stateless. The result of validating a keyword is dependent
-only on the value being validated and the keyword value. A keyword can not be
-dependent on another keyword or any external data.
+Semua kata kunci tidak bernegara. Hasil memvalidasi kata kunci tergantung
+hanya pada nilai yang divalidasi dan nilai kata kunci. Kata kunci tidak bisa
+tergantung pada kata kunci lain atau data eksternal apa pun.
 
 ### Cache
 
-JSON Validation documents are immutable and should be cacheable forever. Once
-published, they should never change. If they need to change, a new document
-should be created that is identified by a unique URL.
+Dokumen Validasi JSON tidak dapat diubah dan harus dapat disimpan dalam cache selamanya. Sekali
+diterbitkan, mereka seharusnya tidak pernah berubah. Jika mereka perlu berubah, dokumen baru
+harus dibuat yang diidentifikasi oleh URL unik.
 
 ### Uniform Interface
 
-JSON Validation documents should validate the same way no matter what language
-the validator is implemented in. Each document identifies what keywords the
-implementation must support. Generating a validation function should result in
-an error if the implementation doesn't support one or more of the the keywords
-in the JSON Validation document. (coming soon)
+Dokumen Validasi JSON harus memvalidasi cara yang sama tidak peduli bahasa apa
+validator diimplementasikan. Setiap dokumen mengidentifikasi kata kunci apa
+implementasi harus mendukung. Membangkitkan fungsi validasi akan menghasilkan
+kesalahan jika implementasi tidak mendukung satu atau lebih dari kata kunci
+dalam dokumen Validasi JSON. (segera akan datang)
 
-The result of validating a JSON document should follow a standardized structure.
-(coming soon)
+Hasil validasi dokumen JSON harus mengikuti struktur standar.
+(segera akan datang)
 
 ### Code on Demand
 
-For the things that can't be described as keywords, it should be possible to
-describe a keyword implementation using JavaScript (coming soon).
+Untuk hal-hal yang tidak dapat digambarkan sebagai kata kunci, itu harus mungkin
+menggambarkan implementasi kata kunci menggunakan JavaScript (segera hadir).
 
 TODOs
 -----
 
-* Keywords as URLs
-* Keywords must be declared
-* Meta validation for keywords whose values are schemas
-* JSON serializable validators
-* More detailed validation results
-* Error message keyword
-* Value as JSON Reference document
-* Keyword composition
-* `$data` keyword
+* Kata kunci sebagai URL
+* Kata kunci harus dinyatakan
+* Validasi meta untuk kata kunci yang nilainya adalah skema
+* Validator JON serializable
+* Hasil validasi lebih rinci
+* Kata kunci pesan galat
+* Nilai sebagai dokumen Referensi JSON
+* Komposisi kata kunci
+* `$data` kata kunci

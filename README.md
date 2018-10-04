@@ -19,6 +19,16 @@ document must conform to in order to be considered valid. The JSON Validation
 document is parsable into a pure function that can be used to validate a JSON
 document in any language.
 
+Indonesian Version
+Validasi JSON
+
+JSON Validation adalah jenis media untuk menggambarkan dan memvalidasi struktur data JSON. Selama bertahun-tahun, saya telah menulis banyak JSON Schemas dan membantu orang lain di semua jenis domain menulis JSON Schemas mereka. JSON Validasi adalah pencitraan ulang JSON Skema berdasarkan pengalaman dan pengetahuan saya. Pada bagian, ini merupakan implementasi bagaimana saya akan mendefinisikan JSON Skema jika diberi batu tulis kosong, tetapi kebanyakan saya menggunakan implementasi ini sebagai kotak pasir untuk mencoba ide-ide dan pendekatan baru ke gaya Skema JSON.
+
+Dokumen Validasi JSON adalah dokumen Referensi JSON dan memiliki aplikasi / json tipe konten / validasi. Untuk memahami Validasi JSON, Anda harus terlebih dahulu memahami Referensi JSON. Berhati-hatilah bahwa ini tidak sama dengan Referensi JSON yang digunakan di JSON Schema.
+
+Sebuah dokumen Validasi JSON adalah sekumpulan batasan delaratif yang harus dipatuhi oleh dokumen JSON agar dianggap valid. Dokumen Validasi JSON dapat diurai menjadi fungsi murni yang dapat digunakan untuk memvalidasi dokumen JSON dalam bahasa apa pun.
+
+
 Installation
 ------------
 
